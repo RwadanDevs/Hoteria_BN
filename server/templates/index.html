@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <form action="">
+        <input type="file" name="avatar" id="image" >
+        <img alt="upload">
+        <button type="submit"></button>
+    </form>
+    <script>
+        const socket = io("/");
+        document.querySelector('form').addEventListener('submit',(e)=>{
+            e.preventDefault()
+            console.log(document.querySelector('input').value)
+            document.querySelector('img').srcObject = document.querySelector('input').value
+        })
+    </script>
+</body>
+</html>
