@@ -4,7 +4,7 @@ export const Auth = Joi.object({
     username: Joi.string().pattern(/^[a-zA-Z0-9 *]{3,25}$/).required(),
     password: Joi.string().pattern(/^[a-zA-Z0-9 *]{3,25}$/).required(),
     origin_type: Joi.string(),
-    origin_id: Joi.number(),
+    origin_id: Joi.number().min(0),
     });
 
 export const Item = Joi.object({
