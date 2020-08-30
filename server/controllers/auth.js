@@ -25,6 +25,6 @@ export default (req,res)=>{
     const tokenData = { role, origin_id: `${origin_id}`||origin, origin_type:origin_type||origin }
 
     const token = jwt.sign(tokenData,process.env.JWT_KEY)
-    utils.setSuccess(200,'LogIn SuccEss',{role,token});
+    utils.setSuccess(200,'LogIn SuccEss',{role,token,origin_id,origin_type});
     utils.send(res)
 }
