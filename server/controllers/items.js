@@ -1,6 +1,7 @@
 import Util from '../helpers/util';
 import uploadImage from '../helpers/imageUploader';
 import itemServices from '../services/itemservice';
+import reviewServices from '../services/commentService';
 
 const utils = new Util()
 
@@ -29,7 +30,9 @@ export default class items{
             return utils.send(res)
         }
 
-        utils.setSuccess(200,'Fetch Successful',{data: item.dataValues})
+        const reviews = await reviewServices.getAllComments(item_id)
+
+        utils.setSuccess(200,'Fetch Successful',{item: item.dataValues,reviews})
         return utils.send(res)
     }
 
