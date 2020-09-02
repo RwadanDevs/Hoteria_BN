@@ -25,7 +25,7 @@ export const tokenCheck = async (req, res) => {
     const { token } = req.params;
     const decoded = jwt.verify(token, process.env.JWT_KEY);
 
-    util.setSuccess(200,'Login Success',{decoded});
+    util.setSuccess(200,'Login Success',{...decoded,token});
     return util.send(res);
   } catch (error) {
     const Error = 'No token provided or Token expired';
