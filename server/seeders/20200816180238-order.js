@@ -11,7 +11,7 @@ export async function up(queryInterface) {
         origin_type:'table',
         origin_id:10,
         total_cost:22000,
-        timestamp: Date.now(),
+        timestamp: 1598263568127,
         createdAt: new Date(),
         updatedAt: new Date(),
       },{
@@ -19,7 +19,7 @@ export async function up(queryInterface) {
         origin_type:'table',
         origin_id:12,
         total_cost:22000,
-        timestamp: Date.now(),
+        timestamp: 1597263568127,
         createdAt: new Date(),
         updatedAt: new Date(),
       },{
@@ -27,7 +27,7 @@ export async function up(queryInterface) {
         origin_type:'Room',
         origin_id:217,
         total_cost:20000,
-        timestamp: Date.now(),
+        timestamp: 1597263568127,
         createdAt: new Date(),
         updatedAt: new Date(),
       },{
@@ -35,7 +35,7 @@ export async function up(queryInterface) {
         origin_type:'table',
         origin_id:12,
         total_cost:22000,
-        timestamp: Date.now(),
+        timestamp: 1599263568127,
         createdAt: new Date(),
         updatedAt: new Date(),
       }

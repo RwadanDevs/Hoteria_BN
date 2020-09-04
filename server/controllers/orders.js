@@ -12,10 +12,12 @@ export default class orders{
 
         if(role === 'GUEST'){
             const found = await orderService.findByOrigin({origin_id,origin_type})
-            orders = found.filter(order=>order.dataValues.status === status)
-        }else if(role !== 'GUEST' && status!==undefined){
-            orders = await orderService.getByStatus(status)
+            status !== undefined ?
+            orders = found.filter(order=>order.dataValues.status === status) :
+            orders = found
         }else{
+            status !== undefined ?
+            orders = await orderService.getByStatus(status) :
             orders = await orderService.getAllOrders()
         }
 
@@ -105,7 +107,7 @@ export default class orders{
         utils.setSuccess(201,'order Created',neworder.dataValues);
         return utils.send(res)
     }
-
+ 
     static async updateAnOrder(req,res){
         const { order_id } = req.params;
         const { origin_id,origin_type,role } = req.userData;
