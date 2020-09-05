@@ -28,7 +28,7 @@ export function up(queryInterface, Sequelize) {
     },
     status:{
       type: Sequelize.STRING,
-      allowNull:false,
+      allowNull:true,
       defaultValue:'pending',
     },
     createdAt: {
