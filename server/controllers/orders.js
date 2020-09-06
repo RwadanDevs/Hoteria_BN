@@ -58,7 +58,7 @@ export default class orders{
     }
 
     static async createAnOrder(req,res){
-        const { items } = req.body;
+        const { items } = req.body; 
         const { origin_id,origin_type } = req.userData;
         let total_cost = 0,activeOrders = 0;
 
@@ -97,7 +97,7 @@ export default class orders{
         const neworder = await orderService.createOrder({
             origin_id,
             origin_type,
-            items,
+            items:JSON.stringify(items),
             total_cost,
             timestamp: Date.now(),
         })

@@ -197,7 +197,7 @@ const roasted = [{
 },{
   name: 'Roasted Chicken',
   food_type: 'Roasted',
-  description: 'Fruit',
+  description: 'Onions Roasted Chicken',
   price:22.20,
   photoUrl:'https://e7.pngegg.com/pngimages/36/27/png-clipart-roasted-chicken-with-lemons-roast-chicken-barbecue-chicken-buffalo-wing-roast-goose-chicken-food-animals-thumbnail.png',
   createdAt: new Date(),
@@ -205,15 +205,15 @@ const roasted = [{
 },{
   name: 'Roasted Turkey',
   food_type: 'Roasted',
-  description: 'Fruit',
+  description: 'Roasted lemon Turkey',
   price:25,
   photoUrl:'https://e7.pngegg.com/pngimages/582/139/png-clipart-roasted-turkey-on-vegetables-file-furnace-microwave-oven-nikai-pricena-a-thanksgiving-dinner-roast-chicken-food-animals-thumbnail.png',
   createdAt: new Date(),
   updatedAt: new Date(),
 },{
-  name: 'Roasted Grill',
+  name: 'Grilled Staick',
   food_type: 'Roasted',
-  description: 'Fruit',
+  description: 'Long stack grill',
   price:25,
   photoUrl:'https://e7.pngegg.com/pngimages/144/202/png-clipart-plate-of-roasted-meat-potatoes-with-dip-and-parsley-leaves-barbecue-grill-beefsteak-beef-plate-grilling-grill-food-baking-thumbnail.png',
   createdAt: new Date(),
