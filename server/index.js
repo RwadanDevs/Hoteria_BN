@@ -1,5 +1,6 @@
 import http from 'http';
 import app from './app';
+import socket from 'socket.io';
 import { startSocket } from './helpers/socketConnection';
 
 const port = process.env.PORT || 3030;

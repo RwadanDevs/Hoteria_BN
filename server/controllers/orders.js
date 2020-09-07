@@ -102,7 +102,7 @@ export default class orders{
             timestamp: Date.now(),
         })
 
-        req.io.emit('new_order',neworder.dataValues);
+        req.io.emit('new_order',{...neworder.dataValues,items});
 
         utils.setSuccess(201,'order Created',neworder.dataValues);
         return utils.send(res)

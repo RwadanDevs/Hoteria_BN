@@ -19,6 +19,7 @@
             console.log(document.querySelector('input').value)
             document.querySelector('img').srcObject = document.querySelector('input').value
         })
-    </script>
+        socket.on('pong',({ id })=>console.log("socket id",id))
+    </script>       
 </body>
 </html>
