@@ -62,22 +62,22 @@ export default class orders{
         const { origin_id,origin_type } = req.userData;
         let total_cost = 0,activeOrders = 0;
 
-        const orders = await orderService.findByOrigin({origin_id,origin_type});
+        // const orders = await orderService.findByOrigin({origin_id,origin_type});
 
-        for(const order of orders){
-            if(order.dataValues.status === 'pending'){
-                activeOrders++;
-            }
-        }
+        // for(const order of orders){
+        //     if(order.dataValues.status === 'pending'){
+        //         activeOrders++;
+        //     }
+        // }
 
-        if(activeOrders === 3){
-            const Error = {
-                message:'Exided the number of orders',
-                tip:'wait for previous orders to be delivered'
-            }
-            utils.setError(409,Error)
-            return utils.send(res)
-        }
+        // if(activeOrders === 3){
+        //     const Error = {
+        //         message:'Exided the number of orders',
+        //         tip:'wait for previous orders to be delivered'
+        //     }
+        //     utils.setError(409,Error)
+        //     return utils.send(res)
+        // }
 
         for(const item of items){
             item = parseInt(item);
@@ -102,7 +102,7 @@ export default class orders{
             timestamp: Date.now(),
         })
 
-        req.io.emit('new_order',{...neworder.dataValues,items});
+        req.io.emit('new_order',neworder.dataValues);
 
         utils.setSuccess(201,'order Created',neworder.dataValues);
         return utils.send(res)
@@ -150,19 +150,25 @@ export default class orders{
             total_cost += parseInt(exist.dataValues.price);
         }
 
+        const timestamp =  role !== "GUEST" ?
+        exist.dataValues.timestamp : DATE.NOW()
+
 
         const order = await orderService.updateAtt({
             ...req.body,
-            origin_id,
-            origin_type,
-            items, 
+            items:JSON.stringify(items),
             total_cost,
-            timestamp: Date.now(),
+            timestamp,
         },{ id:order_id });
-        
-        req.io.emit('updated_order',order.dataValues)
 
-        utils.setSuccess(200,'order Updated',order.dataValues)
+        console.log(order);
+
+        utils.setSuccess(200,'order Updated',{
+            ...exist.dataValues,
+            ...req.body,
+            items:JSON.stringify(items),
+            timestamp
+        })
         return utils.send(res)
     }
 

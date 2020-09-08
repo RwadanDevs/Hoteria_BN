@@ -21,10 +21,10 @@ export default (req,res)=>{
         return utils.send(res)
     }
 
-    let origin = `${role} ${Math.floor(Math.random(1)*10)}`;
-    const tokenData = { role, origin_id: `${origin_id}`||origin, origin_type:origin_type||origin }
+    let origin = `${Math.floor(Math.random(1)*10)}`;
+    const tokenData = { role, origin_id: origin_id||origin, origin_type:origin_type||role }
 
     const token = jwt.sign(tokenData,process.env.JWT_KEY)
-    utils.setSuccess(200,'LogIn SuccEss',{role,token,origin_id,origin_type});
+    utils.setSuccess(200,'LogIn SuccEss',{...tokenData,token});
     utils.send(res)
 }
