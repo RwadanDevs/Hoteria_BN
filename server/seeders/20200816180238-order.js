@@ -8,7 +8,7 @@ export async function up(queryInterface) {
     [
       {
         items:'[1,2]',
-        origin_type:'table',
+        origin_type:'Table',
         origin_id:10,
         total_cost:22000,
         status:'pending',
@@ -17,7 +17,7 @@ export async function up(queryInterface) {
         updatedAt: new Date(),
       },{
         items:'[1,2]',
-        origin_type:'table',
+        origin_type:'Table',
         origin_id:12,
         total_cost:22000,
         timestamp: 1599213568127,
@@ -35,7 +35,7 @@ export async function up(queryInterface) {
         updatedAt: new Date(),
       },{
         items:'[1,2]',
-        origin_type:'table',
+        origin_type:'Table',
         origin_id:12,
         total_cost:22000,
         timestamp: 1599263568127,
