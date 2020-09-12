@@ -13,6 +13,7 @@ cloudinary.config({
 export default async (req) => {
   const file = dataUri(req).content;
   const result = await uploader.upload(file);
+  console.log("got here====",result);
   return result.url;
 };
 

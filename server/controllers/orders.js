@@ -21,7 +21,7 @@ export default class orders{
             orders = await orderService.getAllOrders()
         }
 
-        utils.setSuccess(200,'Fetch Success',orders)
+        utils.setSuccess(200,'Fetch Success',orders.reverse())
         return utils.send(res)
     }
 

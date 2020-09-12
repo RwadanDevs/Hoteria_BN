@@ -5,6 +5,8 @@ import reviewServices from '../services/commentService';
 
 const utils = new Util()
 
+const { WEB_URL }  = process.env;
+
 export default class items{
     static async getAllItems(req,res){
         const { foodType } = req.query;
@@ -36,15 +38,20 @@ export default class items{
         return utils.send(res)
     }
 
-    static async createAnItem(req,res){
+    static async AvatarUpload(req,res){
         if(!req.file){
-         utils.setError(404,'Should Upload Food Avatar')
-         return utils.send(res);
-        }
+            utils.setError(404,'Should Upload Food Avatar')
+            return utils.send(res);
+           }
 
-        const photoUrl = await uploadImage(req);
+        const photoUrl = `${WEB_URL}${req.file.filename}`;
 
-        const newItem = await itemServices.createItem({...req.body,photoUrl});
+        utils.setSuccess(201,'Item Uploaded',photoUrl);
+        return utils.send(res)
+    }
+
+    static async createAnItem(req,res){
+        const newItem = await itemServices.createItem(...req.body);
 
         utils.setSuccess(201,'Item Created',newItem);
         return utils.send(res)

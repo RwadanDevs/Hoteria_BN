@@ -7,9 +7,16 @@ import { authorizationCheck } from "../../middlewares/authorization";
 
 const route = Router();
 
+route.post('/imageUpload',
+            authorizationCheck,
+            role('COOK'),
+            multerUploads,
+            controller.AvatarUpload
+        )
+
 route.get('/items',
             authorizationCheck,
-            controller.getAllItems
+            controller.getAllItems 
         )
 
 route.get('/items/:item_id',
@@ -20,7 +27,6 @@ route.get('/items/:item_id',
 route.post('/items',
             authorizationCheck,
             role('COOK'),
-            multerUploads,
             validator.itemValidator,
             controller.createAnItem
         )

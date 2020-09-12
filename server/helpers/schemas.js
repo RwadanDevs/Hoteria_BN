@@ -10,7 +10,9 @@ export const Auth = Joi.object({
 export const Item = Joi.object({
     name: Joi.string().pattern(/^[a-zA-Z0-9 *]{3,25}$/).required(),
     food_type: Joi.string().required(),
-    description: Joi.string().required(),
+    price: Joi.number().required(),
+    photoUrl:Joi.string().required(),
+    description: Joi.string(),
     status: Joi.string(),
     });
 

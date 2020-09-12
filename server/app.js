@@ -10,6 +10,8 @@ const app = express();
 
 app.use(express.static(path.join(__dirname,'./templates')))
 
+app.use(express.static(path.join(__dirname,'./uploads')))
+
 app.use(cors())
 app.use(morgan('dev'));
 app.use(bodyParser.json());
