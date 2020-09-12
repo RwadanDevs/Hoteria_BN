@@ -51,7 +51,7 @@ export default class items{
     }
 
     static async createAnItem(req,res){
-        const newItem = await itemServices.createItem(...req.body);
+        const newItem = await itemServices.createItem(req.body);
 
         utils.setSuccess(201,'Item Created',newItem);
         return utils.send(res)
