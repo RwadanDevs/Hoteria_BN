@@ -51,7 +51,7 @@ export default class items{
     }
 
     static async createAnItem(req,res){
-        const newItem = await itemServices.createItem(...req.body);
+        const newItem = await itemServices.createItem(req.body);
 
         utils.setSuccess(201,'Item Created',newItem);
         return utils.send(res)
@@ -66,14 +66,8 @@ export default class items{
             return utils.send(res)
         }
         
-        if(!req.file){
-            utils.setError(404,'Should Upload Food Avatar')
-            return utils.send(res);
-        }
-            
-        const photoUrl = await uploadImage(req)
 
-        const item = await itemServices.updateAtt({...req.body,photoUrl},{ id:item_id })
+        const item = await itemServices.updateAtt(req.body,{ id:item_id })
 
         utils.setSuccess(200,'Item Updated',item.dataValues)
         return utils.send(res)
@@ -90,7 +84,7 @@ export default class items{
 
         await itemServices.deleteAtt({ id:item_id })
 
-        utils.setSuccess(200,'Item Deleted')
+        utils.setSuccess(200,'Item Deleted',item_id)
         return utils.send(res)
     }
 }
