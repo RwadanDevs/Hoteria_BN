@@ -19,7 +19,10 @@
             console.log(document.querySelector('input').value)
             document.querySelector('img').srcObject = document.querySelector('input').value
         })
-        socket.on('pong',({ id })=>console.log("socket id",id))
+        socket.on('ping',(id)=>{
+            console.log("recieved ping",id)
+            socket.emit('auth',{socketId: id, authInfo: 'Table 12'})
+        })
     </script>       
 </body>
 </html>
