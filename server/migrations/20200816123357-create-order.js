@@ -32,12 +32,14 @@ export function up(queryInterface, Sequelize) {
       defaultValue:'pending',
     },
     createdAt: {
-      type: Sequelize.DATEONLY,
+      type: Sequelize.DATE, 
+      defaultValue: Sequelize.NOW,
       allowNull: false,
     },
     updatedAt: {
-      type: Sequelize.DATEONLY,
-      allowNull: false,
+      type: Sequelize.DATE, 
+      defaultValue: Sequelize.NOW,
+      allowNull:false
     },
   });
 }

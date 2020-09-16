@@ -151,7 +151,7 @@ export default class orders{
         }
 
         const timestamp =  role !== "GUEST" ?
-        exist.dataValues.timestamp : DATE.NOW()
+        exist.dataValues.timestamp : Date.now()
 
 
         const order = await orderService.updateAtt({
@@ -161,13 +161,12 @@ export default class orders{
             timestamp,
         },{ id:order_id });
 
-        console.log(order);
-
         utils.setSuccess(200,'order Updated',{
             ...exist.dataValues,
             ...req.body,
             items:JSON.stringify(items),
-            timestamp
+            timestamp,
+            updatedA:new Date()
         })
         return utils.send(res)
     }

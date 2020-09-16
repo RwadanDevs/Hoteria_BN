@@ -20,7 +20,6 @@ export const startSocket = (server) => {
         }
         if(!foundUser)
         ActiveUsers.push(data);
-      console.log(foundUser,data);
       })
 
       socket.on('disconnect', () => {
