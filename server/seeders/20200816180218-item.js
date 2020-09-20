@@ -2,8 +2,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const { WEB_URL } = process.env;
-
 const Drinks = [{
   name: 'Cream sherry',
   food_type: 'Drinks',

@@ -1,39 +1,27 @@
 export function up(queryInterface, Sequelize) {
-  return queryInterface.createTable('orders', {
+  return queryInterface.createTable('users', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: Sequelize.BIGINT,
     },
-    items: {
+    username: {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    origin_type: {
+    password: {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    origin_id: {
+    role:{
       type: Sequelize.STRING,
-      allowNull: false,
-    },
-    server: {
-      type:Sequelize.STRING,
-      allowNull:true,
-    },
-    total_cost:{
-      type: Sequelize.BIGINT,
-      allowNull: false,
-    },
-    timestamp: {
-      type: Sequelize.BIGINT,
       allowNull:false,
     },
     status:{
       type: Sequelize.STRING,
       allowNull:true,
-      defaultValue:'pending',
+      defaultValue:'active',
     },
     createdAt: {
       type: Sequelize.DATE, 
@@ -43,10 +31,10 @@ export function up(queryInterface, Sequelize) {
     updatedAt: {
       type: Sequelize.DATE, 
       defaultValue: Sequelize.NOW,
-      allowNull:false
+      allowNull:false,
     },
   });
 }
 export function down(queryInterface) {
-  return queryInterface.dropTable('orders');
+  return queryInterface.dropTable('users');
 }

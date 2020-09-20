@@ -154,10 +154,11 @@ export default class orders{
         exist.dataValues.timestamp : Date.now()
 
 
-        const order = await orderService.updateAtt({
+        await orderService.updateAtt({
             ...req.body,
             items:JSON.stringify(items),
             total_cost,
+            server: origin_id,
             timestamp,
         },{ id:order_id });
 
@@ -166,6 +167,7 @@ export default class orders{
             ...req.body,
             items:JSON.stringify(items),
             timestamp,
+            server: origin_id,
             updatedA:new Date()
         })
         return utils.send(res)

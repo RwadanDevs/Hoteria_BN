@@ -22,6 +22,7 @@ export async function up(queryInterface) {
         total_cost:22000,
         timestamp: 1599213568127,
         status:'delivered',
+        server:'Derrick',
         createdAt: new Date(),
         updatedAt: new Date(),
       },{
@@ -30,6 +31,7 @@ export async function up(queryInterface) {
         origin_id:217,
         total_cost:20000,
         status:'delivered',
+        server:'Aline',
         timestamp: 1597263568127,
         createdAt: new Date(),
         updatedAt: new Date(),

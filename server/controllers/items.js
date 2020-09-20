@@ -1,5 +1,4 @@
 import Util from '../helpers/util';
-import uploadImage from '../helpers/imageUploader';
 import itemServices from '../services/itemservice';
 import reviewServices from '../services/commentService';
 
