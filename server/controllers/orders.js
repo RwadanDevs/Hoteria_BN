@@ -168,7 +168,7 @@ export default class orders{
             items:JSON.stringify(items),
             timestamp,
             server: origin_id,
-            updatedA:new Date()
+            updatedAt:new Date()
         })
         return utils.send(res)
     }
