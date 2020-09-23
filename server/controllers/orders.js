@@ -111,7 +111,7 @@ export default class orders{
     static async updateAnOrder(req,res){
         const { order_id } = req.params;
         const { origin_id,origin_type,role } = req.userData;
-        const exist = await orderService.findById(order_id)
+        const exist = await orderService.findById(order_id);
 
         if(!exist){
             utils.setError(404,'order not Found')

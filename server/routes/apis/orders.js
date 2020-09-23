@@ -12,8 +12,8 @@ route.get('/orders/:order_id',authorizationCheck,controller.getSpecificOrder)
 
 route.post('/orders',authorizationCheck,role('GUEST'),validator.orderValidator,controller.createAnOrder)
 
-route.patch('/orders/:order_id',authorizationCheck,role('GUEST','COOK'),validator.orderValidator,controller.updateAnOrder)
+route.patch('/orders/:order_id',authorizationCheck,role('COOK','MANAGER'),validator.orderValidator,controller.updateAnOrder)
 
-route.delete('/orders/:order_id',authorizationCheck,role('GUEST','COOK'),controller.deleteAnOrder)
+route.delete('/orders/:order_id',authorizationCheck,role('COOK','MANAGER'),controller.deleteAnOrder)
 
 export default route;
