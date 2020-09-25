@@ -1,7 +1,6 @@
 import userService from '../services/userServicee';
 import jwt from 'jsonwebtoken';
 import Utils from '../helpers/util';
-import { util } from 'chai';
 
 const utils = new Utils();
 
