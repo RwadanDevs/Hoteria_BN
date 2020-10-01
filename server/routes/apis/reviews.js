@@ -10,6 +10,6 @@ route.get('/review/:item_id',authorizationCheck,controller.getAllComments)
 
 route.post('/review/:item_id',authorizationCheck,validator.reviewValidator,controller.createComment)
 
-route.delete('/review/:comment_id',authorizationCheck,role('MANAGER'),controller.deleteComment)
+route.delete('/review/:comment_id',authorizationCheck,role('ADMIN'),controller.deleteComment)
 
 export default route;

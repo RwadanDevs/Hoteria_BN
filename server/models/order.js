@@ -2,29 +2,31 @@ export default (sequelize, DataTypes) => {
   const orders = sequelize.define(
     'orders',
     {
-      items: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      origin_type: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      origin_id: {
+      
+      item: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      server: {
-        type: DataTypes.STRING,
-        allowNull:true,
-      },
-      total_cost:{
-        type: DataTypes.BIGINT,
+      itemCount: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
-      timestamp: {
-        type: DataTypes.BIGINT,
-        allowNull:false,
+      creator_id:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      creator_name:{
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      owner:{
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      prep_Status:{
+        type: DataTypes.STRING,
+        allowNull:true,
+        defaultValue:'pending',
       },
       status:{
         type: DataTypes.STRING,

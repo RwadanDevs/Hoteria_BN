@@ -25,9 +25,9 @@ export default class orderServices {
         });
     }
 
-    static findByOrigin({origin_id,origin_type}) {
+    static findByWaitor(prop) {
       return orders.findAll({
-        where: { origin_id,origin_type },
+        where: prop,
       });
     }
 

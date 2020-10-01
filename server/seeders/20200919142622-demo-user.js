@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const { Derrick,Aline,Guest,Admin } = process.env;
+const { Derrick,Aline,Regis,Admin } = process.env;
 
 export async function up(queryInterface) {
   return queryInterface.bulkInsert(
@@ -17,19 +17,19 @@ export async function up(queryInterface) {
       },{
         username:'Aline',
         password: Aline,
-        role:'MANAGER',
+        role:'BAR',
         createdAt: new Date(),
         updatedAt: new Date(),
       },{
-        username:'GUEST',
-        password: Guest,
-        role:'GUEST',
+        username:'Regis',
+        password: Regis,
+        role:'WAITER',
         createdAt: new Date(),
         updatedAt: new Date(),
       },{
         username:'Kalisa',
         password: Admin,
-        role:'Admin',
+        role:'ADMIN',
         createdAt: new Date(),
         updatedAt: new Date(),
       }

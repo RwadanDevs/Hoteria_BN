@@ -7,11 +7,11 @@ const utils = new Util()
 export default class orders{
     static async getAllOrders(req,res){
         const { status } = req.query;
-        const { origin_id,origin_type,role } = req.userData;
+        const { id,role } = req.userData;
         let orders;
 
-        if(role === 'GUEST'){
-            const found = await orderService.findByOrigin({origin_id,origin_type})
+        if(role === 'WAITER'){
+            const found = await orderService.findByWaitor({ creator_id : id })
             status !== undefined ?
             orders = found.filter(order=>order.dataValues.status === status) :
             orders = found
@@ -58,48 +58,20 @@ export default class orders{
     }
 
     static async createAnOrder(req,res){
-        const { items } = req.body; 
-        const { origin_id,origin_type } = req.userData;
-        let total_cost = 0,activeOrders = 0;
+        const { item } = req.body; 
+        const { id,username } = req.userData;
 
-        // const orders = await orderService.findByOrigin({origin_id,origin_type});
+        const exist = await itemServices.findById(item);
 
-        // for(const order of orders){
-        //     if(order.dataValues.status === 'pending'){
-        //         activeOrders++;
-        //     }
-        // }
-
-        // if(activeOrders === 3){
-        //     const Error = {
-        //         message:'Exided the number of orders',
-        //         tip:'wait for previous orders to be delivered'
-        //     }
-        //     utils.setError(409,Error)
-        //     return utils.send(res)
-        // }
-
-        for(const item of items){
-            item = parseInt(item);
-
-            if(isNaN(item))continue;
-
-            const exist = await itemServices.findById(item);
-
-            if(!exist){
-                utils.setError(404,`Item_id ${item} was not Found`)
-                return utils.send(res)
-            }
-            
-            total_cost += parseInt(exist.dataValues.price);
+        if(!exist){
+            utils.setError(404,`Item_id ${item} was not Found`)
+            return utils.send(res)
         }
-
+        
         const neworder = await orderService.createOrder({
-            origin_id,
-            origin_type,
-            items:JSON.stringify(items),
-            total_cost,
-            timestamp: Date.now(),
+            creator_id:id,
+            creator_name:username,
+            ...req.body
         })
 
         req.io.emit('new_order',neworder.dataValues);
@@ -110,7 +82,7 @@ export default class orders{
  
     static async updateAnOrder(req,res){
         const { order_id } = req.params;
-        const { origin_id,origin_type,role } = req.userData;
+        const { username,id,role } = req.userData;
         const exist = await orderService.findById(order_id);
 
         if(!exist){
@@ -119,56 +91,21 @@ export default class orders{
         }
 
         if(exist.dataValues.status !== 'pending'){
-            utils.setError(409,'Order has Been Delivered')
+            utils.setError(400,'Order has Been Delivered')
             return utils.send(res)
         }
 
-        if( role === 'GUEST' && origin_id !== exist.dataValues.origin_id ){
-                const Error = {
-                    message:'Ownership Restriction',
-                    tip:`this order is from ${exist.dataValues.origin_type} ${exist.dataValues.origin_id} and you are ${origin_type} ${origin_id}`
-                }
-                utils.setError(403,Error)
-                return utils.send(res)
-            }
-
-        const { items } = req.body;
-        let total_cost = 0;
-
-        for(const item of items){
-            item = parseInt(item);
-
-            if(isNaN(item))continue;
-
-            const exist = await itemServices.findById(item);
-
-            if(!exist){
-                utils.setError(404,`Item_id ${item} was not Found`)
-                return utils.send(res)
-            }
-            
-            total_cost += parseInt(exist.dataValues.price);
+        if( req.body.status !== "pending"  && parseInt(exist.dataValues.creator_id) !== id  ){
+            utils.setError(403,`this is ${role+" "+username}'s order`)
+            return utils.send(res)
         }
 
-        const timestamp =  role !== "GUEST" ?
-        exist.dataValues.timestamp : Date.now()
-
-
-        await orderService.updateAtt({
-            ...req.body,
-            items:JSON.stringify(items),
-            total_cost,
-            server: origin_id,
-            timestamp,
-        },{ id:order_id });
+        await orderService.updateAtt(req.body,{ id:order_id });
 
         utils.setSuccess(200,'order Updated',{
             ...exist.dataValues,
             ...req.body,
-            items:JSON.stringify(items),
-            timestamp,
-            server: origin_id,
-            updatedAt:new Date()
+            updateAtt: new Date()
         })
         return utils.send(res)
     }

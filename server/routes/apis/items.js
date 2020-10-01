@@ -26,14 +26,14 @@ route.get('/items/:item_id',
 
 route.post('/items',
             authorizationCheck,
-            role('COOK'),
+            role('ADMIN'),
             validator.itemValidator,
             controller.createAnItem
         )
 
 route.patch('/items/:item_id',
             authorizationCheck,
-            role('COOK'),
+            role('COOK','ADMIN','BAR'),
             multerUploads,
             validator.itemValidator,
             controller.updateAnItem
@@ -41,7 +41,7 @@ route.patch('/items/:item_id',
 
 route.delete('/items/:item_id',
             authorizationCheck,
-            role('COOK'),
+            role('COOK','ADMIN','BAR'),
             controller.deleteAnItem 
         )
 

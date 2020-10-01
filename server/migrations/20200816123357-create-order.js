@@ -6,29 +6,30 @@ export function up(queryInterface, Sequelize) {
       primaryKey: true,
       type: Sequelize.BIGINT,
     },
-    items: {
+    item: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
+    itemCount: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
+    creator_id:{
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
+    creator_name:{
       type: Sequelize.STRING,
       allowNull: false,
     },
-    origin_type: {
+    owner:{
       type: Sequelize.STRING,
       allowNull: false,
     },
-    origin_id: {
+    prep_Status:{
       type: Sequelize.STRING,
-      allowNull: false,
-    },
-    server: {
-      type:Sequelize.STRING,
       allowNull:true,
-    },
-    total_cost:{
-      type: Sequelize.BIGINT,
-      allowNull: false,
-    },
-    timestamp: {
-      type: Sequelize.BIGINT,
-      allowNull:false,
+      defaultValue:'pending',
     },
     status:{
       type: Sequelize.STRING,

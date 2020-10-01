@@ -7,7 +7,7 @@ const utils = new Utils();
 export default class Auth{
 
     static async Login (req,res) {
-        const { username,password,origin_id,origin_type } = req.body;
+        const { username,password } = req.body;
 
         const exist = await userService.getUser(username);
         
@@ -21,12 +21,9 @@ export default class Auth{
             return utils.send(res)
         }
 
-        const { role } = exist.dataValues;
+        const token = jwt.sign(exist.dataValues,process.env.JWT_KEY);
 
-        const tokenData = { role, origin_id: origin_id||username, origin_type:origin_type||role};
-        const token = jwt.sign(tokenData,process.env.JWT_KEY);
-
-        utils.setSuccess(200,'LogIn SuccEss',{...tokenData,token});
+        utils.setSuccess(200,'LogIn SuccEss',{token,...exist.dataValues});
         utils.send(res)
     }
     
