@@ -19,6 +19,10 @@ export default (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      total_cost:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       owner:{
         type: DataTypes.STRING,
         allowNull: false,

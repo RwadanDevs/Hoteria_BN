@@ -27,7 +27,6 @@ export default class orders{
 
     static async getSpecificOrder(req,res){
         const { order_id } = req.params;
-        const { origin_id,origin_type,role } = req.userData;
         const order = await orderService.findById(order_id)
 
         if(!order){
@@ -35,30 +34,15 @@ export default class orders{
             return utils.send(res)
         }
 
-        if( role == 'GUEST' && origin_id !== order.dataValues.origin_id ){
-            const Error = {
-                message:'Ownership Restriction',
-                tip:`this order is from ${order.dataValues.origin_type} ${order.dataValues.origin_id} and you are ${origin_type} ${origin_id}`
-            }
-            utils.setError(403,Error)
-            return utils.send(res)
-        }
+        const item = await itemServices.findById(order.item);
+        const { photoUrl,name,price } = item.dataValues;
 
-        let { items } = order.dataValues;
-        items = JSON.parse(items);
-        const data  = [];
-
-        for(const item of items){
-            const exist = await itemServices.findById(item)
-            data.push(exist.dataValues)
-        }
-
-        utils.setSuccess(200,'Fetch Successful',{ order: order.dataValues, items : data })
+        utils.setSuccess(200,'Fetch Successful',{...order.dataValues,photoUrl,name,price })
         return utils.send(res)
     }
 
     static async createAnOrder(req,res){
-        const { item } = req.body; 
+        const { item,itemCount } = req.body; 
         const { id,username } = req.userData;
 
         const exist = await itemServices.findById(item);
@@ -71,6 +55,7 @@ export default class orders{
         const neworder = await orderService.createOrder({
             creator_id:id,
             creator_name:username,
+            total_cost:exist.dataValues.price*itemCount,
             ...req.body
         })
 
@@ -90,13 +75,8 @@ export default class orders{
             return utils.send(res)
         }
 
-        if(exist.dataValues.status !== 'pending'){
-            utils.setError(400,'Order has Been Delivered')
-            return utils.send(res)
-        }
-
-        if( req.body.status !== "pending"  && parseInt(exist.dataValues.creator_id) !== id  ){
-            utils.setError(403,`this is ${role+" "+username}'s order`)
+        if( req.body.status !== "pending"  && exist.dataValues.creator_id !== parseInt(id)  ){
+            utils.setError(403,`This is ${role+" "+username}'s order`)
             return utils.send(res)
         }
 
@@ -112,26 +92,17 @@ export default class orders{
 
     static async deleteAnOrder(req,res){
         const { order_id } = req.params;
-        const { origin_id,origin_type,role } = req.userData;
+        const { id,username } = req.userData;
         const order = await orderService.findById(order_id)
 
-        if(!order){
-            utils.setError(404,'order not Found') 
-            return utils.send(res)
-        }
-
-        if( role === 'GUEST' && origin_id !== order.dataValues.origin_id ){
-            const Error = {
-                message:'Ownership Restriction',
-                tip:`this order is from ${order.dataValues.origin_type} ${order.dataValues.origin_id} and you are ${origin_type} ${origin_id}`
-            }
-            utils.setError(403,Error)
+        if( parseInt(id) !== order.dataValues.creator_id ){
+            utils.setError(403,`this is ${username}'s order not yours`)
             return utils.send(res)
         }
 
         await orderService.deleteAtt(order_id)
 
-        utils.setSuccess(200,'order Deleted')
+        utils.setSuccess(200,'order Deleted',order_id)
         return utils.send(res)
     }
 }

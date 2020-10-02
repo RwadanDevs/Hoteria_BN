@@ -18,7 +18,9 @@ export const Item = Joi.object({
 
 export const Order = Joi.object({
     item: Joi.number().required(),
+    itemCount:Joi.number().required(),
     owner: Joi.string().required(),
+    prep_Status: Joi.string(),
     status: Joi.string(),
     });
 

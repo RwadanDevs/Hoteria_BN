@@ -9,7 +9,7 @@ export default class Auth{
     static async Login (req,res) {
         const { username,password } = req.body;
 
-        const exist = await userService.getUser(username);
+        const exist = await userService.getUser(`${username}`.toLowerCase());
         
         if(!exist){
             utils.setError(400,'Invalid User')
@@ -28,7 +28,7 @@ export default class Auth{
     }
     
     static async CreateUser(req,res){
-        const newUser = userService.createNewUser(req.body)
+        const newUser = userService.createNewUser({...req.body,username: `${req.body.username}`.toLowerCase()})
         utils.setSuccess(201,'User Created',newUser)
         utils.send(res)
     }

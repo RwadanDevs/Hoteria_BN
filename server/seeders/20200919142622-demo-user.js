@@ -9,25 +9,25 @@ export async function up(queryInterface) {
     'users',
     [
       {
-        username:'Derrick',
+        username:'derrick',
         password: Derrick,
         role:'COOK',
         createdAt: new Date(),
         updatedAt: new Date(),
       },{
-        username:'Aline',
+        username:'aline',
         password: Aline,
         role:'BAR',
         createdAt: new Date(),
         updatedAt: new Date(),
       },{
-        username:'Regis',
+        username:'regis',
         password: Regis,
         role:'WAITER',
         createdAt: new Date(),
         updatedAt: new Date(),
       },{
-        username:'Kalisa',
+        username:'kalisa',
         password: Admin,
         role:'ADMIN',
         createdAt: new Date(),

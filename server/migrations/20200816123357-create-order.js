@@ -22,6 +22,10 @@ export function up(queryInterface, Sequelize) {
       type: Sequelize.STRING,
       allowNull: false,
     },
+    total_cost:{
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
     owner:{
       type: Sequelize.STRING,
       allowNull: false,
