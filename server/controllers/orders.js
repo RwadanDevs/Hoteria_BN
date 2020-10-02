@@ -82,6 +82,10 @@ export default class orders{
 
         await orderService.updateAtt(req.body,{ id:order_id });
 
+        if(req.body.prep_Status !== "pending" && req.body.status === "pending"){
+            req.io.emit('updated_order',req.body);
+        }
+
         utils.setSuccess(200,'order Updated',{
             ...exist.dataValues,
             ...req.body,
