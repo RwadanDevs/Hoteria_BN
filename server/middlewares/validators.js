@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import Util from '../helpers/util';
-import { Item,Order,Auth,comment } from '../helpers/schemas';
+import { Item,Order,Auth,comment,transaction,product } from '../helpers/schemas';
 
 const util = new Util();
 
@@ -36,6 +36,18 @@ const handler = (req,res,schema) => {
 export default class validators {
     static async orderValidator(req, res, next) { 
       const result  = handler(req,res,Order)
+        
+      result === 1 ? next() : null
+    }
+
+    static async ProductValidation(req, res, next) { 
+      const result  = handler(req,res,product)
+        
+      result === 1 ? next() : null
+    }
+
+    static async TransactionValidator(req, res, next) { 
+      const result  = handler(req,res,transaction)
         
       result === 1 ? next() : null
     }

@@ -11,13 +11,10 @@ export default class orders{
         let orders;
 
         if(role === 'WAITER'){
-            const found = await orderService.findByWaitor({ creator_id : id })
-            status !== undefined ?
-            orders = found.filter(order=>order.dataValues.status === status) :
-            orders = found
+            orders = await orderService.findByWaiter({ creator_id : id })
+        }else if(role === "BAR" || role === "COOK"){
+            orders = await orderService.findByProcessor({ processor : role })
         }else{
-            status !== undefined ?
-            orders = await orderService.getByStatus(status) :
             orders = await orderService.getAllOrders()
         }
 

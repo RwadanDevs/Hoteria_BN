@@ -1,48 +1,31 @@
 export function up(queryInterface, Sequelize) {
-  return queryInterface.createTable('orders', {
+  return queryInterface.createTable('products', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: Sequelize.BIGINT,
     },
-    item: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-    },
-    itemCount: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-    },
-    creator_id:{
-      type: Sequelize.INTEGER,
-      allowNull: false,
-    },
-    creator_name:{
+    name: {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    total_cost:{
+    quantity: {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
-    owner:{
+    type:{
       type: Sequelize.STRING,
       allowNull: false,
     },
-    processor:{
+    avatar:  {
       type: Sequelize.STRING,
       allowNull: false,
-    },
-    prep_Status:{
-      type: Sequelize.STRING,
-      allowNull:true,
-      defaultValue:'pending',
     },
     status:{
       type: Sequelize.STRING,
       allowNull:true,
-      defaultValue:'pending',
+      defaultValue:'active',
     },
     createdAt: {
       type: Sequelize.DATE, 
@@ -57,5 +40,5 @@ export function up(queryInterface, Sequelize) {
   });
 }
 export function down(queryInterface) {
-  return queryInterface.dropTable('orders');
+  return queryInterface.dropTable('products');
 }

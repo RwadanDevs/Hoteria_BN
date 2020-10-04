@@ -6,7 +6,7 @@
   "scripts": {
     "test": "set NODE_ENV = test && npm run devtables && nyc --reporter=html --reporter=text mocha --require @babel/register ./server/tests/*.js --recursive ./server/tests/*.js --exit",
     "start": "babel-node server/index.js",
-    "dev": "npm run devtables && nodemon --exec babel-node server/index.js",
+    "dev": "nodemon --exec babel-node server/index.js",
     "devtables": "npm run droptables && npm run newtables && npm run seeds",
     "seeds": "npx sequelize-cli db:seed:all",
     "newtables": "npx sequelize-cli db:migrate",

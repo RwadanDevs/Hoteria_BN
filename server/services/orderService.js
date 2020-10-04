@@ -25,7 +25,13 @@ export default class orderServices {
         });
     }
 
-    static findByWaitor(prop) {
+    static findByWaiter(prop) {
+      return orders.findAll({
+        where: prop,
+      });
+    }
+
+    static findByProcessor(prop) {
       return orders.findAll({
         where: prop,
       });

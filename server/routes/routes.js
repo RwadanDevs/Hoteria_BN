@@ -4,6 +4,8 @@ import auth from './apis/auth';
 import items from './apis/items';
 import orders from './apis/orders';
 import reviews from './apis/reviews';
+import products from './apis/products'; 
+import transactions from './apis/transactions'; 
 import Util from '../helpers/util';
 import notFound from '../middlewares/notFound';
 
@@ -24,6 +26,8 @@ router.use(`${url}`, auth);
 router.use(`${url}`, items);
 router.use(`${url}`, orders);
 router.use(`${url}`, reviews);
+router.use(`${url}`, products);
+router.use(`${url}`, transactions);
 router.use(notFound);
 
 export default router;

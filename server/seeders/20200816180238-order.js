@@ -13,6 +13,7 @@ export async function up(queryInterface) {
         total_cost:1500,
         creator_name:'regis',
         owner:'Table 2',
+        processor:'BAR',
         status:'pending',
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -24,6 +25,7 @@ export async function up(queryInterface) {
         creator_id:1,
         creator_name:'derrick',
         owner:'Table 7',
+        processor:'COOK',
         createdAt: new Date(),
         updatedAt: new Date(),
       },{
@@ -34,6 +36,7 @@ export async function up(queryInterface) {
         creator_id:2,
         creator_name:'aline',
         owner:'Table 10',
+        processor:'COOK',
         createdAt: new Date(),
         updatedAt: new Date(),
       },{
@@ -44,6 +47,7 @@ export async function up(queryInterface) {
         creator_name:'regis',
         owner:'Table 5',
         status:'pending',
+        processor:'BAR',
         createdAt: new Date(),
         updatedAt: new Date(),
       }

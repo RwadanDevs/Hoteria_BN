@@ -1,40 +1,30 @@
 export default (sequelize, DataTypes) => {
-  const orders = sequelize.define(
-    'orders',
+  const transactions = sequelize.define(
+    'transactions',
     {
-      
-      item: {
+      author_id:{
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      itemCount: {
+      author_name:{
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      details:{
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      product_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      creator_id:{
+      product_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      quantity:{
         type: DataTypes.INTEGER,
         allowNull: false,
-      },
-      creator_name:{
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      total_cost:{
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      owner:{
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      processor:{
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      prep_Status:{
-        type: DataTypes.STRING,
-        allowNull:true,
-        defaultValue:'pending',
       },
       status:{
         type: DataTypes.STRING,
@@ -45,6 +35,6 @@ export default (sequelize, DataTypes) => {
     {},
   );
 
-  orders.associate = (models) => {};
-  return orders;
+  transactions.associate = (models) => {};
+  return transactions;
 };

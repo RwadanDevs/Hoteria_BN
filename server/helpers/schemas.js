@@ -20,7 +20,25 @@ export const Order = Joi.object({
     item: Joi.number().required(),
     itemCount:Joi.number().required(),
     owner: Joi.string().required(),
+    processor: Joi.string().required(),
     prep_Status: Joi.string(),
+    status: Joi.string(),
+    });
+
+export const product = Joi.object({
+    name: Joi.string().required(),
+    quantity: Joi.number().required(),
+    type: Joi.string().required(),
+    avatar: Joi.string(),
+    status: Joi.string(),
+    });
+
+export const transaction = Joi.object({
+    type: Joi.string().required(),
+    product: Joi.number().required(),
+    quantity: Joi.number().required(),
+    avatar: Joi.string(),
+    transaction_type: Joi.string().required(),
     status: Joi.string(),
     });
 
