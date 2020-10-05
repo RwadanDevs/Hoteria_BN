@@ -8,6 +8,8 @@ const route = Router();
 
 route.get('/products', authorizationCheck, controller.getAllProducts)
 
+route.get('/products/:id', authorizationCheck, controller.getOneProduct)
+
 route.post('/products', authorizationCheck,role('ADMIN'), validator.ProductValidation, controller.createProduct) 
 
 route.patch('/products/:id',authorizationCheck,role('ADMIN','COOK','BAR'), validator.ProductValidation, controller.updateProduct) 

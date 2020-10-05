@@ -18,6 +18,19 @@ export default class products{
         return utils.send(res)
     }
 
+    static async getOneProduct(req,res){
+        const { id } = req.params;
+        const product = await productServices.fingById(id);
+
+        if(!product){
+            utils.setError(404,'Product NotFound')
+            return utils.send(res)
+        }
+
+        utils.setSuccess(200,'Fetch Success',product)
+        return utils.send(res)
+    }
+
     static async createProduct(req,res){
         const { id,username } = req.userData;
 
@@ -36,7 +49,7 @@ export default class products{
             product_id: newProduct.dataValues.id,
             product_name: newProduct.dataValues.name,
             quantity:newProduct.dataValues.quantity,
-            details:"Create Product",
+            details:"Created Product",
         })
         
         utils.setSuccess(201,'Product Created Success',newProduct)
@@ -71,7 +84,7 @@ export default class products{
             product_id: product.dataValues.id,
             product_name: name,
             quantity,
-            detailts:transaction_type||'Updated some credential',
+            details:transaction_type||'Updated some credential',
         })
 
         
