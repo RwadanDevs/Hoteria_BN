@@ -59,8 +59,8 @@ export default class products{
     static async updateProduct(req,res){
         const { username } = req.userData;
         const { id } = req.params;
-        const { name,quantity } = req.body;
-        let transaction_type;
+        const { name,quantity,avatar,price } = req.body;
+        let transaction_type,difference;
 
         const product = await productServices.fingById(id);
 
@@ -71,11 +71,23 @@ export default class products{
 
         await productServices.updateAtt( req.body,{ id })
 
-        if(req.body.quantity !== product.dataValues.quantity){
+        if(quantity !== product.dataValues.quantity){
+            if(quantity > product.dataValues.quantity){
+                difference = quantity - product.dataValues.quantity
+                transaction_type = `Added ${difference} ${name}, new Net Worth is ${price} rwf`;
+            }else{
+                difference = product.dataValues.quantity - quantity;
+               transaction_type =  `Reduced ${difference} ${name}, new Net Worth is ${price} Rwf`;
+            }
             
-            transaction_type = quantity > product.dataValues.quantity ? 
-            `Added ${quantity - product.dataValues.quantity} ${name}(s) `: 
-            `Reduced ${product.dataValues.quantity - quantity} ${name}(s) `;
+        }
+
+        if(avatar !== product.dataValues.avatar){
+            transaction_type += `Changes delivery from ${avatar} to ${product.dataValues.avatar}`;
+        }
+
+        if(quantity){
+            transaction_type += `,Shop Alert: Product ${name} is finished`
         }
 
         await transactionServices.createProduct({
@@ -83,7 +95,7 @@ export default class products{
             author_name: username,
             product_id: product.dataValues.id,
             product_name: name,
-            quantity,
+            quantity: difference ,
             details:transaction_type||'Updated some credential',
         })
 
@@ -108,7 +120,7 @@ export default class products{
             product_id: product.dataValues.id,
             product_name: product.dataValues.name,
             quantity:product.dataValues.quantity,
-            details:'Deleted Product',
+            details:`Product ${product.dataValues.name} was Deleted`,
         })
 
         await productServices.deleteAtt(id)

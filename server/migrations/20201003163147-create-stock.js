@@ -10,6 +10,10 @@ export function up(queryInterface, Sequelize) {
       type: Sequelize.STRING,
       allowNull: false,
     },
+    price: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
     quantity: {
       type: Sequelize.INTEGER,
       allowNull: false,

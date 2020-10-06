@@ -28,6 +28,7 @@ export const Order = Joi.object({
 export const product = Joi.object({
     name: Joi.string().required(),
     quantity: Joi.number().required(),
+    price: Joi.number().required(),
     type: Joi.string().required(),
     avatar: Joi.string(),
     status: Joi.string(),

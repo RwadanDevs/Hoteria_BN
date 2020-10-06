@@ -6,6 +6,10 @@ export default (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      price:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       quantity:{
         type: DataTypes.INTEGER,
         allowNull: false,
