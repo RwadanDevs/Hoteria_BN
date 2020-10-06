@@ -7,22 +7,55 @@
     <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
-    <form action="">
-        <input type="file" name="avatar" id="image" >
-        <img alt="upload">
-        <button type="submit"></button>
-    </form>
+    <div style="
+        width:90%;margin: 0 auto;
+        text-align:center;
+        border-top-right-radius: 50%;
+        border-top-left-radius: 50%;
+    ">
+        <div style="
+            background:orange;
+            padding: 5px;
+            font-size: 35px;
+            border-top-right-radius: 30px;
+            border-top-left-radius: 30px;
+        ">
+            <h1 >PASADA</h1>
+        </div>
+        <div style="
+            background:whitesmoke;
+            padding: 10px;
+            margin: 0 auto;
+            border:1px solid orange;
+            border-top:none;
+        ">
+            <h3 style="font-size: 30px;">Transaction</h3>
+            <section style="display:flex;width: 90%; margin: 0 auto;">
+                <span style="flex: 0.1;">🙍</span>
+                <span style="flex: 0.9;text-align: left;">Aline</span>
+            </section>
+            <section style="display:flex;width: 90%; margin: 0 auto;">
+                <span style="flex: 0.1;">🍷</span>
+                <span style="flex: 0.9;text-align: left;">Primus</span>
+            </section>
+            <section style="display:flex;width: 90%; margin: 0 auto;">
+                <span style="flex: 0.1;">📑</span>
+                <span style="flex: 0.9;text-align: left;">Reduced 100 Fanta, new Net Worth is 30000 Rwf</span>
+            </section>
+        </div>
+    </div>
     <script>
         const socket = io("/");
-        document.querySelector('form').addEventListener('submit',(e)=>{
-            e.preventDefault()
-            console.log(document.querySelector('input').value)
-            document.querySelector('img').srcObject = document.querySelector('input').value
-        })
         socket.on('ping',(id)=>{
             console.log("recieved ping",id)
             socket.emit('auth',{socketId: id, authInfo: 'Table 12'})
         })
+        const transaction = {
+            author_name: 'Aline',
+            product_name: 'Primus',
+            details: 'Added 50 new products',
+            timeStamp: 'Today at 2:30 PM'
+        }
     </script>       
 </body>
 </html>

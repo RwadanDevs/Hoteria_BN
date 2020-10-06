@@ -1,4 +1,5 @@
 import Util from '../helpers/util';
+import mailer from '../helpers/mailer';
 import productServices from '../services/productService';
 import transactionServices from '../services/transactionService';
 
@@ -14,7 +15,7 @@ export default class products{
         await productServices.fingByType(type):
         await productServices.AllProducts()   ;
 
-        utils.setSuccess(200,'Fetch Success',products)
+        utils.setSuccess(200,'Fetch Success',products.reverse())
         return utils.send(res)
     }
 
@@ -43,7 +44,7 @@ export default class products{
 
         const newProduct = await productServices.createProduct(req.body);
 
-        await transactionServices.createProduct({
+        await transactionServices.createTrans({
             author_id: id,
             author_name: username,
             product_id: newProduct.dataValues.id,
@@ -86,11 +87,11 @@ export default class products{
             transaction_type += `Changes delivery from ${avatar} to ${product.dataValues.avatar}`;
         }
 
-        if(quantity){
-            transaction_type += `,Shop Alert: Product ${name} is finished`
+        if(parseInt(quantity) === 0){
+            transaction_type += `, Shop Alert: Product ${name} is finished`
         }
 
-        await transactionServices.createProduct({
+        const trans = await transactionServices.createTrans({
             author_id: req.userData.id,
             author_name: username,
             product_id: product.dataValues.id,
@@ -99,6 +100,7 @@ export default class products{
             details:transaction_type||'Updated some credential',
         })
 
+        mailer( trans.dataValues )
         
         utils.setSuccess(200, transaction_type||'Updated some credential' +' Success')
         return utils.send(res)

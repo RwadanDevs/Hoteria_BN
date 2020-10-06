@@ -3,7 +3,7 @@ import models from '../models';
 const { transactions } = models;
 
 export default class transactionServices {
-    static createProduct(newTrans){
+    static createTrans(newTrans){
         return transactions.create(newTrans);
     }
 

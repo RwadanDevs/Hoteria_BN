@@ -13,7 +13,7 @@ export default class transactions{
         await transactionServices.fingByAuthor(id):
         await transactionServices.allTransactions()
         
-        utils.setSuccess(200,'Fetch Success',transactions)
+        utils.setSuccess(200,'Fetch Success',transactions.reverse())
         return utils.send(res)
     }
 
